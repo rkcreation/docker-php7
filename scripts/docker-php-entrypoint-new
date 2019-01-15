@@ -1,0 +1,31 @@
+#!/bin/bash
+set -e
+
+# Time Zone
+# 
+echo "$PHP_CONF_TIMEZONE" > /etc/timezone
+ln -sf "/usr/share/zoneinfo/$PHP_CONF_TIMEZONE" /etc/localtime
+
+ntpd -gq
+service ntp start
+dpkg-reconfigure -f noninteractive tzdata
+
+# echo "date.timezone=$TIMEZONE" > $PHP_INI_DIR/conf.d/10-date_timezone.ini;
+
+# Runtime confs
+
+if [[ ${PHP_IGNORE_ENVIRONMENT_SETTINGS} != "true" ]]; then
+  /root/setup-fpm-conf.sh
+  # /root/setup-cli-conf.sh;
+  /root/setup-fpm-pool.sh
+  echo "PHP config from env vars : OK"
+fi
+
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+	set -- php-fpm "$@"
+fi
+
+composer update
+
+exec "$@"

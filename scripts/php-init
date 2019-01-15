@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e
+
+# Adjust user
+
+sed -ri "s/^www-data:x:33:33:/www-data:x:${RUN_UID}:${RUN_GID}:/" /etc/passwd
+
+
+# Time Zone
+# 
+echo "$PHP_CONF_TIMEZONE" > /etc/timezone
+ln -sf "/usr/share/zoneinfo/$PHP_CONF_TIMEZONE" /etc/localtime
+
+ntpd -gq
+service ntp start
+dpkg-reconfigure -f noninteractive tzdata
+
+# echo "date.timezone=$TIMEZONE" > $PHP_INI_DIR/conf.d/10-date_timezone.ini;
+
+# Runtime confs
+
+if [[ ${PHP_IGNORE_ENVIRONMENT_SETTINGS} != "true" ]]; then
+  /root/setup-fpm-conf.sh
+  # /root/setup-cli-conf.sh;
+  /root/setup-fpm-pool.sh
+  echo "PHP config from env vars : OK"
+fi
+
+php-fpm
