@@ -13,5 +13,5 @@ sed -i "s|pm = .*|pm = ${PHP_POOL_PM_CONTROL}|" ${PHP_POOL_FILE};
 
 sed -i "s|catch_workers_output = .*|catch_workers_output = ${PHP_POOL_CATCH_WORKERS_OUTPUT}|" ${PHP_POOL_FILE};
 
-echo "error_log = /proc/self/fd/2" > ${PHP_POOL_FILE};
-echo "access.log = /proc/self/fd/2" > ${PHP_POOL_FILE};
+echo "error_log = /proc/self/fd/2" >> ${PHP_POOL_FILE};
+echo "access.log = /proc/self/fd/2" >> ${PHP_POOL_FILE};
