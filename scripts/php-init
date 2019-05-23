@@ -26,4 +26,4 @@ dpkg-reconfigure -f noninteractive tzdata
   echo "PHP config from env vars : OK"
 # fi
 
-php-fpm
+php-fpm -R
