@@ -21,4 +21,3 @@ sed -i "s|;opcache.revalidate_freq.*|opcache.revalidate_freq = ${PHP_CONF_OPCACH
 sed -i "s|;opcache.fast_shutdown.*|opcache.fast_shutdown = ${PHP_CONF_OPCACHE_FAST_SHUTDOWN}|" ${PHP_CONF_FILE};
 sed -i "s|;opcache.enable_cli.*|opcache.enable_cli = ${PHP_CONF_OPCACHE_ENABLE_CLI}|" ${PHP_CONF_FILE};
 sed -i "s|;opcache.enable.*|opcache.enable = ${PHP_CONF_OPCACHE_ENABLE}|" ${PHP_CONF_FILE};
-

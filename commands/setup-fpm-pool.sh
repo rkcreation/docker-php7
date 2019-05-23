@@ -11,7 +11,8 @@ sed -i "s|pm.min_spare_servers = .*|pm.min_spare_servers = ${PHP_POOL_PM_MIN_SPA
 sed -i "s|pm.max_spare_servers = .*|pm.max_spare_servers = ${PHP_POOL_PM_MAX_SPARE_SERVERS}|" ${PHP_POOL_FILE};
 sed -i "s|pm = .*|pm = ${PHP_POOL_PM_CONTROL}|" ${PHP_POOL_FILE};
 
-sed -i "s|catch_workers_output = .*|catch_workers_output = ${PHP_POOL_CATCH_WORKERS_OUTPUT}|" ${PHP_POOL_FILE};
+sed -i "s|;catch_workers_output = .*|catch_workers_output = ${PHP_POOL_CATCH_WORKERS_OUTPUT}|" ${PHP_POOL_FILE};
 
-echo "error_log = /proc/self/fd/2" >> ${PHP_POOL_FILE};
+sed -i "s|;php_admin_value[error_log] = .*|php_admin_value[error_log] = /proc/self/fd/2|" ${PHP_POOL_FILE};
+# echo "error_log = /proc/self/fd/2" >> ${PHP_POOL_FILE};
 echo "access.log = /proc/self/fd/2" >> ${PHP_POOL_FILE};
