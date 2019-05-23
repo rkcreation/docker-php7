@@ -19,11 +19,11 @@ dpkg-reconfigure -f noninteractive tzdata
 
 # Runtime confs
 
-if [[ ${PHP_IGNORE_ENVIRONMENT_SETTINGS} != "true" ]]; then
+# if [[ ${PHP_IGNORE_ENVIRONMENT_SETTINGS} != "true" ]]; then
   /root/setup-fpm-conf.sh
   # /root/setup-cli-conf.sh;
   /root/setup-fpm-pool.sh
   echo "PHP config from env vars : OK"
-fi
+# fi
 
 php-fpm
