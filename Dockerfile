@@ -173,6 +173,12 @@ RUN apt-get update && \
 RUN gem install mailcatcher --no-rdoc --no-ri
 
 
+# CacheTool
+RUN curl -sO http://gordalina.github.io/cachetool/downloads/cachetool.phar && \
+  mv cachetool.phar /usr/bin/cachetool && \
+  chmod +x /usr/bin/cachetool
+
+
 # Drush install
 # Install Drush 8 with the phar file.
 # Set the Drush version.
